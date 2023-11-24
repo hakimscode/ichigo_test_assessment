@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Color Boxes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- This setup is not suitable for production. -->
+  <!-- Only use it in development! -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react?dev",
+        "react-dom/client": "https://esm.sh/react-dom/client?dev"
+      }
+    }
+  </script>
+  <script type="text/babel" data-type="module">
+    import React, { useState, StrictMode } from 'react';
+    import { createRoot } from 'react-dom/client';
+
+    const App = function App() {
+      const [colors, setColors] = useState([
+        '#0089e0',
+        '#e53458',
+        '#8c7a5b',
+        '#b85e61',
+        '#7f00cb',
+        '#00b19f',
+        '#007a67',
+        '#6953fe',
+        '#475c6d',
+      ]);
+
+      const getRandomColor = () => {
+        return '#' + Math.floor(Math.random()*16777215).toString(16);
+      }
+
+      const randomColor = () => {
+        const newColors = []
+        for (let i=0; i < colors.length; i++) {
+          newColors.push(getRandomColor())
+        }
+        setColors(newColors)
+      }
+
+      const listColor = () => {
+        const newColors = []
+        for (let i=0; i < colors.length; i++) {
+          if (i === 0) {
+            newColors.push(colors[colors.length - 1])
+          } else {
+            newColors.push(colors[i-1])
+          }
+        }
+        setColors(newColors)
+      }
+
+      const handleClick = (e) => {
+        const numberBox = e.currentTarget.innerText
+        if (numberBox % 2 === 0) {
+          randomColor()
+        } else {
+          listColor()
+        }
+      }
+
+      return (
+        <div className="container">
+          <div className="row-1">
+            <div className="col-1">
+              <div className="box-1" onClick={handleClick} style={{ backgroundColor: colors[0] }}>1</div>
+            </div>
+            <div className="col-2">
+              <div className="col-2-row-1">
+                <div className="box-2" onClick={handleClick} style={{ backgroundColor: colors[1] }}>2</div>
+              </div>
+              <div className="col-2-row-2">
+                <div className="box-3" onClick={handleClick} style={{ backgroundColor: colors[2] }}>3</div>
+                <div className="box-4" onClick={handleClick} style={{ backgroundColor: colors[3] }}>4</div>
+              </div>
+            </div>
+          </div>
+          <div className="row-2">
+            <div className="row-2-col-1">
+              <div className="box-5" onClick={handleClick} style={{ backgroundColor: colors[4] }}>5</div>
+              <div className="box-6" onClick={handleClick} style={{ backgroundColor: colors[5] }}>6</div>
+            </div>
+            <div className="row-2-col-2">
+              <div className="box-7" onClick={handleClick} style={{ backgroundColor: colors[6] }}>7</div>
+            </div>
+            <div className="row-2-col-3">
+              <div className="box-8" onClick={handleClick} style={{ backgroundColor: colors[7] }}>8</div>
+              <div className="box-9" onClick={handleClick} style={{ backgroundColor: colors[8] }}>9</div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+
+    const root = createRoot(document.getElementById('root'));
+    root.render(
+      <StrictMode>
+        <App />
+      </StrictMode>
+    );
+  </script>
+</html>
