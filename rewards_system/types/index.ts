@@ -1,13 +1,13 @@
-interface RewardsQuery {
+export interface RewardsQuery {
   at: string;
 }
 
-interface RewardsParam {
+export interface RewardsParam {
   id: string;
   redeemParam?: string;
 }
 
-interface Rewards {
+export interface Rewards {
   availableAt: string
   redeemedAt: string | null
   expiresAt: string

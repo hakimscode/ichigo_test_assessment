@@ -1,4 +1,5 @@
 const request = require("supertest");
+import { Rewards } from "types";
 import app from "../src/app"
 import moment from 'moment';
 

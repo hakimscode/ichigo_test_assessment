@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import moment from 'moment';
+import { Rewards, RewardsParam, RewardsQuery } from 'types';
 
 const app = express();
 app.use(express.urlencoded({extended: true}))
