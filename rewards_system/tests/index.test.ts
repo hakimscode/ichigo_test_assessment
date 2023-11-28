@@ -31,7 +31,9 @@ describe("List rewards", () => {
 });
 
 describe("Redeem a Reward", () => {
-  const userId = '1';
+  // ? create a new user's rewards list,
+  // ? because test will error if using same id for previous test while test is running at the same runtime and same data
+  const userId = '2';
   const at = moment().utc(true).toISOString();
   let rewards: Rewards[] = []
 
@@ -66,7 +68,7 @@ describe("Redeem a Reward", () => {
     const redeemParam = moment().utc(true).toISOString()
 
     // ? Try to redeem a reward with user id that does not exists
-    const res = await request(app).patch(`/users/2/rewards/${redeemParam}/redeem`);
+    const res = await request(app).patch(`/users/3/rewards/${redeemParam}/redeem`);
     expect(res.statusCode).toBe(404);
 
     const data = res._body
